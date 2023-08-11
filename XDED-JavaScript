@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Data Processing</title>
+    <script>
+        // Function to fetch data from Twitter API
+        function scrapeTwitterData(username) {
+            fetch(`https://api.twitter.com/1.1/users/show.json?screen_name=${username}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer YOUR_TWITTER_BEARER_TOKEN'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Process and display data in the HTML
+                document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error fetching Twitter data:', error);
+            });
+        }
+        
+        // Function to fetch transaction data from Etherscan API
+        function fetchEtherscanTransactions(walletAddress) {
+            fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${walletAddress}&apikey=YOUR_ETHERSCAN_API_KEY`)
+            .then(response => response.json())
+            .then(data => {
+                // Process and display data in the HTML
+                document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error fetching Etherscan data:', error);
+            });
+        }
+        
+        // Function to process data
+        function processData(username) {
+            scrapeTwitterData(username);
+        }
+    </script>
+</head>
+<body>
+    <h1>API Data Processing</h1>
+    <input type="text" id="username" placeholder="Enter Twitter Username">
+    <button onclick="processData(document.getElementById('username').value)">Process Data</button>
+    <pre id="result">
+        <!-- API data will be displayed here -->
+    </pre>
+</body>
+</html>
