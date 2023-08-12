@@ -1,0 +1,18 @@
+async function checkUserActivity(walletAddresses) {
+    const backendUrl = 'https://your-backend.com/checkUserActivity';
+    
+    try {
+        const response = await fetch(backendUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ walletAddresses })
+        });
+        const data = await response.json();
+        return data; // Object indicating user activity
+    } catch (error) {
+        console.error('Error checking user activity:', error);
+        return {};
+    }
+}
