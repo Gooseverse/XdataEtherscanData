@@ -1,0 +1,18 @@
+async function fetchWalletAddressesFromUserNames(userNames) {
+    const backendUrl = 'https://your-backend.com/getWalletsFromUserNames';
+    
+    try {
+        const response = await fetch(backendUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userNames })
+        });
+        const data = await response.json();
+        return data; // Object with user names and corresponding wallet addresses
+    } catch (error) {
+        console.error('Error fetching wallet addresses:', error);
+        return {};
+    }
+}
