@@ -1,0 +1,3 @@
+function extractUserNames(tweets) {
+    return tweets.map(tweet => tweet.author_id);
+}
